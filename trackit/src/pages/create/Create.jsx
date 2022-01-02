@@ -1,7 +1,7 @@
 
 
 // styles
-import "./styles"
+import "./Create.css"
 
 const Create = () => {
   return ( 

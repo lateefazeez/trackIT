@@ -42,7 +42,7 @@ ul {
 }
 .btn:hover {
   color: #fff;
-  background-color: vart(--primary-color);
+  background-color: var(--primary-color);
 }
 
 /* forms */

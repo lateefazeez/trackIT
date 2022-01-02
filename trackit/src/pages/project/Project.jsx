@@ -1,7 +1,7 @@
 
 
 // styles
-import "./styles"
+import "./Project.css"
 
 const Project = () => {
   return ( 

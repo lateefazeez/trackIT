@@ -1,7 +1,7 @@
 
 
 // styles
-import "./styles.css"
+import "./Signup.css"
 
 const Signup = () => {
   return ( 

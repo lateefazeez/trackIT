@@ -1,6 +1,6 @@
 
 // styles
-import "./dashboard.css"
+import "./Dashboard.css"
 
 const Dashboard = () => {
   return ( 
