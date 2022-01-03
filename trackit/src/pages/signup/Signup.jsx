@@ -1,4 +1,5 @@
-
+import { useSignup } from "../../hooks/useSignup";
+import Spinner from "../../components/Spinner";
 
 // styles
 import { useState } from "react";
@@ -11,9 +12,12 @@ const Signup = () => {
   const [thumbnail, setThumbnail] = useState(null) 
   const [thumbnailError, setThumbnailError] = useState(null)
 
+  const { signup, isPending, error } = useSignup()
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(email, password, displayName, thumbnail)
+    signup(email, password, displayName, thumbnail)
+    
   }
 
   const handleFileChange = (e) => {
@@ -78,7 +82,9 @@ const Signup = () => {
         />
         { thumbnailError && <div className="error">{ thumbnailError }</div>}
       </label>
-      <button className="btn">Sign up</button>
+      { !isPending && <button className="btn">Sign up</button>}
+      { isPending && <button className="btn" disabled><Spinner /></button>}
+      { error && <div className="error">{error}</div>}
     </form>
    );
 }
