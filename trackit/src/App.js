@@ -1,33 +1,58 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext";
 
 // styles
-import './App.css';
+import "./App.css";
 
 // pages and components
-import Dashboard from "./pages/dashboard/Dashboard"
-import Create from "./pages/create/Create"
-import Project from "./pages/project/Project"
-import Login from "./pages/login/Login"
-import Signup from "./pages/signup/Signup"
+import Dashboard from "./pages/dashboard/Dashboard";
+import Create from "./pages/create/Create";
+import Project from "./pages/project/Project";
+import Login from "./pages/login/Login";
+import Signup from "./pages/signup/Signup";
 import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar"
+import Sidebar from "./components/Sidebar";
 
 function App() {
+  const { authIsReady, user } = useAuthContext();
   return (
     <div className="App">
-      <BrowserRouter>
-      <Sidebar />
-      <div className="container">
-          <Navbar />
-          <Routes>
-            <Route exact path="/" element={<Dashboard />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/projects/:id" element={<Project />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
+      {authIsReady && (
+        <BrowserRouter>
+          <Sidebar />
+          <div className="container">
+            <Navbar />
+            <Routes>
+              {user && <Route exact path="/" element={<Dashboard />} />}
+              {!user && (
+                <Route path="/" element={<Navigate replace to="/login" />} />
+              )}
+              {user && <Route path="/create" element={<Create />} />}
+              {!user && (
+                <Route
+                  path="/create"
+                  element={<Navigate replace to="/login" />}
+                />
+              )}
+              {user && <Route path="/projects/:id" element={<Project />} />}
+              {!user && (
+                <Route
+                  path="projects/:id/"
+                  element={<Navigate replace to="/login" />}
+                />
+              )}
+              {!user && <Route path="/login" element={<Login />} />}
+              {user && (
+                <Route path="/login" element={<Navigate replace to="/" />} />
+              )}
+              {!user && <Route path="/signup" element={<Signup />} />}
+              {user && (
+                <Route path="/signup" element={<Navigate replace to="/" />} />
+              )}
+            </Routes>
+          </div>
+        </BrowserRouter>
+      )}
     </div>
   );
 }
