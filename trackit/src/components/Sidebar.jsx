@@ -1,18 +1,20 @@
-
+import Avatar from "./Avatar";
 import { NavLink } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 // styles & icons
-import "./Sidebar.css"
-import DashboardIcon from "../assets/dashboard_icon.svg"
-import AddIcon from "../assets/add_icon.svg"
+import "./Sidebar.css";
+import DashboardIcon from "../assets/dashboard_icon.svg";
+import AddIcon from "../assets/add_icon.svg";
 
 const Sidebar = () => {
-  return ( 
+  const { user } = useAuthContext();
+  return (
     <div className="sidebar">
       <div className="sidebar-content">
         <div className="user">
-          {/* avatar and username here later */}
-          <p>Hey User</p>
+          <Avatar src={user && user.photoURL} />
+          <p>Hey {user && user.displayName}</p>
         </div>
         <nav className="links">
           <ul>
@@ -32,7 +34,7 @@ const Sidebar = () => {
         </nav>
       </div>
     </div>
-   );
-}
- 
+  );
+};
+
 export default Sidebar;
