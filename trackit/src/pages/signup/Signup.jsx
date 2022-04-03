@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { useSignup } from "../../hooks/useSignup";
 import Spinner from "../../components/Spinner/Spinner";
-import { useState } from "react";
 
 // styles
 import "./Signup.css";
@@ -31,8 +31,8 @@ const Signup = () => {
       setThumbnailError("Selected file must be an image");
       return;
     }
-    if (selected.size > 100000) {
-      setThumbnailError("Image file size must be less than 100kb");
+    if (selected.size > 200000) {
+      setThumbnailError("Image file size must be less than 200kb");
       return;
     }
 
@@ -43,9 +43,9 @@ const Signup = () => {
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
-      <h2>Sign up</h2>
+      <h2 className="form-header">Sign Up</h2>
       <label>
-        <span>email:</span>
+        <span>Email:</span>
         <input
           required
           type="email"
@@ -54,7 +54,7 @@ const Signup = () => {
         />
       </label>
       <label>
-        <span>password:</span>
+        <span>Password:</span>
         <input
           required
           type="password"
@@ -63,7 +63,7 @@ const Signup = () => {
         />
       </label>
       <label>
-        <span>display name:</span>
+        <span>Display Name:</span>
         <input
           required
           type="text"
@@ -72,11 +72,11 @@ const Signup = () => {
         />
       </label>
       <label>
-        <span>thumbnail:</span>
+        <span>Thumbnail:</span>
         <input required type="file" onChange={handleFileChange} />
         {thumbnailError && <div className="error">{thumbnailError}</div>}
       </label>
-      {!isPending && <button className="btn">Sign up</button>}
+      {!isPending && <button className="btn-login-signup">Sign up</button>}
       {isPending && (
         <button className="btn" disabled>
           <Spinner />

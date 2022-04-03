@@ -20,7 +20,7 @@ const Login = () => {
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
-      <h2>Login</h2>
+      <h2 className="form-header">Login</h2>
       <label>
         <span>email:</span>
         <input
