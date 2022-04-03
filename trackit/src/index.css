@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap");
 
 /* variables */
 :root {
+  --primary-color: #4d45b5;
+  --secondary-color: #382af2;
+  --tertiary-color: #08071d;
   --heading-color: #444;
   --text-color: #999;
-  --primary-color: #8d69f1;
+  --sidebar-color: #212129;
+  --table-bg-color: #262525;
   --highlight-color: #d13267;
   --bg-color: #f4f4f4;
 }
@@ -12,12 +16,18 @@
 /* base styles */
 body {
   margin: 0;
-  font-family: Poppins, sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 1.1em;
   background: var(--bg-color);
 }
 
-ul, li, p, h2, h3, h3, h4 {
+ul,
+li,
+p,
+h2,
+h3,
+h3,
+h4 {
   margin: 0;
   padding: 0;
 }
@@ -54,7 +64,8 @@ label span {
   display: block;
   margin-bottom: 6px;
 }
-input, textarea {
+input,
+textarea {
   padding: 8px 6px;
   font-size: 1em;
   color: #777;

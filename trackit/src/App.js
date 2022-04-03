@@ -10,9 +10,9 @@ import Create from "./pages/create/Create";
 import Project from "./pages/project/Project";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
-import OnlineUsers from "./components/OnlineUsers";
+import Navbar from "./components/Navbar/Navbar";
+import Sidebar from "./components/Sidebar/Sidebar";
+import OnlineUsers from "./components/OnlineUsers/OnlineUsers";
 
 function App() {
   const { authIsReady, user } = useAuthContext();

@@ -1,5 +1,5 @@
 import { useLogin } from "../../hooks/useLogin";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/Spinner/Spinner";
 
 // styles
 import { useState } from "react";

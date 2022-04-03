@@ -1,5 +1,5 @@
-import { useCollection } from "../hooks/useCollection";
-import Avatar from "./Avatar";
+import { useCollection } from "../../hooks/useCollection";
+import Avatar from "../Avatar/Avatar";
 
 // styles
 import "./OnlineUsers.css";

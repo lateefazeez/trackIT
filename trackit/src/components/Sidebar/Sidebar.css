@@ -1,11 +1,11 @@
 .sidebar {
   width: 270px;
   min-width: 270px;
-  background: var(--primary-color);
+  background: var(--sidebar-color);
   min-height: 100vh;
   box-sizing: border-box;
   position: relative;
-  color: #fff;
+  color: rgb(228, 224, 224);
 }
 .sidebar-content {
   position: fixed;
@@ -30,7 +30,7 @@
   padding: 10px;
   text-decoration: none;
   width: 100%;
-  color: #fff;
+  color: rgb(228, 224, 224);
   box-sizing: border-box;
 }
 .sidebar .links img {

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useLogout } from "../hooks/useLogout";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from "../../hooks/useLogout";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 // styles & images
 import "./Navbar.css";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner/Spinner";
 
 const Navbar = () => {
   const { logout, isPending } = useLogout();
