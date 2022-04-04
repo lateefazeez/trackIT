@@ -1,9 +1,18 @@
+import { useEffect } from "react";
 import { useState } from "react";
+import Select from "react-select";
+
+import { useCollection } from "../../hooks/useCollection";
 
 // styles
 import "./Create.css";
 
 export default function Create() {
+  const { documents } = useCollection("users");
+  const [users, setUsers] = useState([]);
+
+  console.log(documents);
+
   // form field values
   const [name, setName] = useState("");
   const [details, setDetails] = useState("");
@@ -14,15 +23,32 @@ export default function Create() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(name, details, dueDate);
+    console.log(name, details, dueDate, category, assignedUsers);
   };
+
+  const categories = [
+    { value: "development", label: "Development" },
+    { value: "design", label: "Design" },
+    { value: "sales", label: "Sales" },
+    { value: "marketing", label: "Marketing" },
+  ];
+
+  useEffect(() => {
+    if (documents) {
+      const options = documents.map((user) => {
+        return { value: user, label: user.displayName };
+      });
+
+      setUsers(options);
+    }
+  }, [documents]);
 
   return (
     <div className="create-form">
       <h2 className="page-title">Create a new Project</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          <span>Project name:</span>
+          <span>Project Name:</span>
           <input
             required
             type="text"
@@ -39,7 +65,7 @@ export default function Create() {
           ></textarea>
         </label>
         <label>
-          <span>Set due date:</span>
+          <span>Set Due Date:</span>
           <input
             required
             type="date"
@@ -48,15 +74,22 @@ export default function Create() {
           />
         </label>
         <label>
-          <span>Project category:</span>
-          {/* select here later */}
+          <span>Project Category:</span>
+          <Select
+            options={categories}
+            onChange={(option) => setCategory(option)}
+          />
         </label>
         <label>
           <span>Assign to:</span>
-          {/* select here later */}
+          <Select
+            options={users}
+            onChange={(option) => setAssignedUsers(option)}
+            isMulti
+          />
         </label>
 
-        <button className="btn">Add Project</button>
+        <button className="btn">Create Project</button>
       </form>
     </div>
   );
