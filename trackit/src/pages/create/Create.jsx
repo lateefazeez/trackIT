@@ -19,9 +19,22 @@ export default function Create() {
   const [dueDate, setDueDate] = useState("");
   const [category, setCategory] = useState("");
   const [assignedUsers, setAssignedUsers] = useState([]);
+  const [formError, setFormError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!category) {
+      setFormError(null);
+      setFormError("Please select a project category");
+      return;
+    }
+
+    if (assignedUsers.length < 1) {
+      setFormError(null);
+      setFormError("Please assign at least one user to this project");
+      return;
+    }
 
     console.log(name, details, dueDate, category, assignedUsers);
   };
@@ -90,6 +103,7 @@ export default function Create() {
         </label>
 
         <button className="btn">Create Project</button>
+        {formError && <p className="error">{formError}</p>}
       </form>
     </div>
   );
