@@ -78,7 +78,7 @@ const Signup = () => {
       </label>
       {!isPending && <button className="btn-login-signup">Sign up</button>}
       {isPending && (
-        <button className="btn" disabled>
+        <button className="btn-login-signup" disabled>
           <Spinner />
         </button>
       )}

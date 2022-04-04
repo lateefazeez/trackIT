@@ -32,12 +32,12 @@ const Navbar = () => {
         {user && (
           <li>
             {!isPending && (
-              <button className="btn" onClick={logout}>
+              <button className="btn-logout" onClick={logout}>
                 Logout
               </button>
             )}
             {isPending && (
-              <button className="btn" disabled>
+              <button className="btn-logout" disabled>
                 <Spinner />
               </button>
             )}

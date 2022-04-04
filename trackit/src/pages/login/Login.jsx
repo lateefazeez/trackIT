@@ -22,7 +22,7 @@ const Login = () => {
     <form className="auth-form" onSubmit={handleSubmit}>
       <h2 className="form-header">Login</h2>
       <label>
-        <span>email:</span>
+        <span>Email:</span>
         <input
           required
           type="email"
@@ -31,7 +31,7 @@ const Login = () => {
         />
       </label>
       <label>
-        <span>password:</span>
+        <span>Password:</span>
         <input
           required
           type="password"
@@ -39,9 +39,9 @@ const Login = () => {
           value={password}
         />
       </label>
-      {!isPending && <button className="btn">Login</button>}
+      {!isPending && <button className="btn-login-signup">Login</button>}
       {isPending && (
-        <button className="btn" disabled>
+        <button className="btn-login-signup" disabled>
           <Spinner />
         </button>
       )}
