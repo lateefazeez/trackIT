@@ -1,17 +1,25 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
 import { useCollection } from "../../hooks/useCollection";
+import { timestamp } from "../../firebase/config";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useFirestore } from "../../hooks/useFirestore";
+import Spinner from "../../components/Spinner/Spinner";
 
 // styles
 import "./Create.css";
 
 export default function Create() {
+  const { addDocument, response } = useFirestore("projects");
+  const { user } = useAuthContext();
+
   const { documents } = useCollection("users");
   const [users, setUsers] = useState([]);
 
-  console.log(documents);
+  const navigate = useNavigate();
 
   // form field values
   const [name, setName] = useState("");
@@ -20,6 +28,7 @@ export default function Create() {
   const [category, setCategory] = useState("");
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [formError, setFormError] = useState(null);
+  const [isPending, setIspending] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +45,36 @@ export default function Create() {
       return;
     }
 
-    console.log(name, details, dueDate, category, assignedUsers);
+    const createdBy = {
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      id: user.uid,
+    };
+
+    const assignedUsersList = assignedUsers.map((u) => {
+      return {
+        displayName: u.value.displayName,
+        photoURL: u.value.photoURL,
+        id: u.value.id,
+      };
+    });
+
+    const project = {
+      name,
+      details,
+      dueDate: timestamp.fromDate(new Date(dueDate)),
+      category: category.value,
+      comments: [],
+      createdBy,
+      assignedUsers: assignedUsersList,
+    };
+
+    if (!response.error) {
+      setIspending(true);
+      await addDocument(project);
+      setIspending(false);
+      navigate("/");
+    }
   };
 
   const categories = [
@@ -101,8 +139,12 @@ export default function Create() {
             isMulti
           />
         </label>
-
-        <button className="btn">Create Project</button>
+        {isPending && (
+          <button className="btn" disabled>
+            <Spinner />
+          </button>
+        )}
+        {!isPending && <button className="btn">Create Project</button>}
         {formError && <p className="error">{formError}</p>}
       </form>
     </div>
